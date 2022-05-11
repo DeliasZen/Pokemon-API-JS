@@ -94,3 +94,41 @@ h1 {
 
   letter-spacing: 1px;
 }
+
+.pagination-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+
+  list-style-type: none;
+}
+
+.page {
+  margin: 5px;
+  padding: 10px 20px 10px;
+
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+
+  color: white;
+  border-radius: 30px;
+
+  font-size: 2rem;
+}
+.page:hover {
+  -webkit-transition: 0.5s;
+       -o-transition: 0.5s;
+          transition: 0.5s;
+
+  background-color: darkgrey;
+}
+.page.active {
+  -webkit-transition: 1s;
+       -o-transition: 1s;
+          transition: 1s;
+
+  background-color: red;
+}

@@ -1,5 +1,10 @@
 const container = document.querySelector('#poke-container');
-const pokemonsNumber = 50;
+const paginationContainer = document.querySelector('.pagination-container')
+const pokemonsNumber = 324;
+const pokemonOnPage = 54;
+const pokemonStartWatch = 1;
+
+let pageActive = null;
 
 const colors = {
   fire: '#FDDFDF',
@@ -20,8 +25,8 @@ const colors = {
 
 const main_types = Object.keys(colors);
 
-const fetchPokemons = (pokemonsNumber) => {
-  for (let i = 1; i <= pokemonsNumber; i++) getPokemon(i)
+const fetchPokemons = async (pokemonStartWatch, pokemonOnPage) => {
+  for (let i = pokemonStartWatch; i <= pokemonOnPage; i++) await getPokemon(i)
 }
 
 const getPokemon = async (id) => {
@@ -32,6 +37,7 @@ const getPokemon = async (id) => {
 }
 
 function createPokemonCard(pokemon) {
+
   const pokemonEl = document.createElement('div');
   pokemonEl.classList.add('pokemon');
 
@@ -58,5 +64,49 @@ function createPokemonCard(pokemon) {
   container.appendChild(pokemonEl);
 }
 
-fetchPokemons(pokemonsNumber)
-// fetchPokemon()
+fetchPokemons(pokemonStartWatch, pokemonOnPage)
+
+// Pagination
+const createPagination = () => {
+  pagesCount = Math.ceil(pokemonsNumber / pokemonOnPage);
+
+  for (let i = 1; i <= pagesCount; i++) {
+    const page = document.createElement('li');
+    page.classList.add('page');
+    page.innerText = i;
+    paginationContainer.appendChild(page);
+    if (i === 1) {
+      page.classList.add('active');
+      pageActive = page;
+    }
+  }
+}
+
+createPagination()
+
+const pageSwap = (e) => {
+  target = e.target;
+  console.log(target);
+
+  if (target.classList.contains('page') && !target.classList.contains('active')) {
+    const fin = target.innerText * pokemonOnPage;
+    const start = fin - pokemonOnPage + 1;
+
+    document.querySelectorAll('.pokemon').forEach(i => i.remove())
+    fetchPokemons(start, fin)
+
+    pageActive.classList.remove('active');
+    target.classList.add('active');
+    pageActive = target;
+    paginationContainer.removeEventListener('click', pageSwap);
+
+    setTimeout(() => {
+      paginationContainer.addEventListener('click', pageSwap)
+    }, 400)
+  }
+
+
+
+}
+
+paginationContainer.addEventListener('click', pageSwap)

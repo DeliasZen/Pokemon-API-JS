@@ -66,3 +66,32 @@ h1 {
 	margin: 15px 0 7px;
 	letter-spacing: 1px;
 }
+
+//pagi
+
+.pagination {
+
+}
+.pagination-container {
+	display: flex;
+	list-style-type: none;
+}
+
+.page{
+	font-size: 2rem;
+	padding: 10px 20px 10px;
+	margin: 5px;
+	cursor: pointer;
+	user-select: none;
+	color: white;
+	border-radius: 30px;
+	&:hover {
+		background-color: darkgrey;
+		transition: 0.5s;
+	}
+
+	&.active {
+		background-color: red;
+		transition: 1s;
+	}
+}
