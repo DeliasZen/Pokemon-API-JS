@@ -6,7 +6,7 @@
 
 body {
 	background: #FFF44F;
-  background: linear-gradient(110deg, #FFF44F, #FF4040);
+	background: linear-gradient(110deg, #FFF44F, #FF4040);
 
 	display: flex;
 	flex-direction: column;
@@ -16,8 +16,11 @@ body {
 	margin: 0;
 }
 
+
+
 h1 {
 	letter-spacing: 3px;
+	
 }
 
 .poke-container {
@@ -69,22 +72,24 @@ h1 {
 
 //pagi
 
-.pagination {
+.pagination {}
 
-}
 .pagination-container {
 	display: flex;
 	list-style-type: none;
+	flex-wrap: wrap;
+	padding: 0;
 }
 
-.page{
+.page {
 	font-size: 2rem;
-	padding: 10px 20px 10px;
+	padding: 10px 20px;
 	margin: 5px;
 	cursor: pointer;
 	user-select: none;
 	color: white;
 	border-radius: 30px;
+
 	&:hover {
 		background-color: darkgrey;
 		transition: 0.5s;
@@ -94,4 +99,13 @@ h1 {
 		background-color: red;
 		transition: 1s;
 	}
+}
+
+.load {
+	display: inline-block;
+	user-select: none;
+	font-size: 2rem;
+	margin: 0;
+	color: transparent;
+	transition: all .5s;
 }

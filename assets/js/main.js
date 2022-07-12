@@ -1,8 +1,9 @@
 const container = document.querySelector('#poke-container');
 const paginationContainer = document.querySelector('.pagination-container')
-const pokemonsNumber = 324;
-const pokemonOnPage = 54;
+const pokemonsNumber = 250;
+const pokemonOnPage = 50;
 const pokemonStartWatch = 1;
+const loadBar = document.querySelector('.load')
 
 let pageActive = null;
 
@@ -85,8 +86,12 @@ const createPagination = () => {
 createPagination()
 
 const pageSwap = (e) => {
+  if (document.querySelectorAll('.pokemon').length !== pokemonOnPage) {
+    loadBar.style.color = 'whitesmoke'
+    return setTimeout(() => loadBar.style.color = 'transparent', 1000)
+  }
+
   target = e.target;
-  console.log(target);
 
   if (target.classList.contains('page') && !target.classList.contains('active')) {
     const fin = target.innerText * pokemonOnPage;
@@ -98,15 +103,7 @@ const pageSwap = (e) => {
     pageActive.classList.remove('active');
     target.classList.add('active');
     pageActive = target;
-    paginationContainer.removeEventListener('click', pageSwap);
-
-    setTimeout(() => {
-      paginationContainer.addEventListener('click', pageSwap)
-    }, 400)
   }
-
-
-
 }
 
 paginationContainer.addEventListener('click', pageSwap)
